@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gym Olimpo · Marcos Juárez — Entrená sin límites</title>
+<meta name="description" content="Gym Olimpo en Marcos Juárez. Musculación, Pilates Reformer (12 camas), Spinning, Kick Boxing, Zumba y más. Sin matrícula, sin permanencia. Bv. Sáenz Peña 1051.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lima:#AADD00;
+    --violeta:#7B2FBE;
+    --negro:#0a0a0a;
+    --negro-2:#111111;
+    --negro-3:#161616;
+    --gris:#9a9a9a;
+    --gris-claro:#cfcfcf;
+    --borde:rgba(255,255,255,.08);
+    --wpp:#25D366;
+    --r:16px;
+    --max:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--negro);
+    color:#fff;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px}
+  section{position:relative}
+
+  /* ---------- Botones ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-weight:700;font-size:15px;border-radius:50px;padding:14px 26px;
+    cursor:pointer;border:none;transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
+    white-space:nowrap;
+  }
+  .btn-lima{background:var(--lima);color:#0a0a0a}
+  .btn-lima:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(170,221,0,.5)}
+  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.25)}
+  .btn-ghost:hover{border-color:var(--lima);color:var(--lima);transform:translateY(-2px)}
+  .btn-wpp{background:var(--wpp);color:#fff}
+  .btn-wpp:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(37,211,102,.55)}
+
+  /* ---------- Títulos ---------- */
+  .eyebrow{
+    display:inline-block;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    color:var(--lima);margin-bottom:14px;
+  }
+  h2.title{font-size:clamp(28px,4.5vw,46px);font-weight:900;line-height:1.1;letter-spacing:-1px}
+  .lima{color:var(--lima)}
+  .sect-head{max-width:620px;margin-bottom:46px}
+  .sect-head p{color:var(--gris);margin-top:14px;font-size:17px}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,10,10,.78);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--borde);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:900;font-size:19px;letter-spacing:-.5px}
+  .logo-ico{
+    width:38px;height:38px;border-radius:11px;background:var(--violeta);
+    display:flex;align-items:center;justify-content:center;font-size:19px;
+    box-shadow:0 6px 18px -6px rgba(123,47,190,.7);
+  }
+  .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+  .nav-links a{font-size:15px;font-weight:500;color:var(--gris-claro);transition:color .2s}
+  .nav-links a:hover{color:var(--lima)}
+  .nav-cta{display:flex;align-items:center;gap:14px}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+  .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobile-menu{
+    display:none;flex-direction:column;gap:6px;
+    background:var(--negro-2);border-bottom:1px solid var(--borde);
+    padding:14px 20px 22px;
+  }
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{padding:12px 4px;font-weight:600;border-bottom:1px solid var(--borde)}
+  .mobile-menu .btn{margin-top:12px}
+
+  /* ---------- HERO ---------- */
+  .hero{min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .hero-video{
+    position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  }
+  .hero-video iframe{
+    position:absolute;top:50%;left:50%;
+    width:100vw;height:56.25vw;min-height:100vh;min-width:177.77vh;
+    transform:translate(-50%,-50%);border:0;
+  }
+  .hero-overlay{
+    position:absolute;inset:0;z-index:1;
+    background:linear-gradient(100deg,rgba(10,10,10,.93) 0%,rgba(10,10,10,.78) 45%,rgba(10,10,10,.55) 100%),
+               linear-gradient(0deg,rgba(10,10,10,.95) 0%,rgba(10,10,10,0) 55%);
+  }
+  .hero .wrap{position:relative;z-index:2;padding-top:80px;padding-bottom:60px}
+  .hero-content{max-width:720px}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(123,47,190,.18);border:1px solid rgba(123,47,190,.5);
+    color:#d9c2f0;font-size:13px;font-weight:600;padding:7px 15px;border-radius:50px;margin-bottom:24px;
+  }
+  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--lima);box-shadow:0 0 10px var(--lima)}
+  .hero h1{font-size:clamp(40px,7vw,76px);font-weight:900;line-height:1.02;letter-spacing:-2px;margin-bottom:20px}
+  .hero p.sub{font-size:clamp(16px,2.2vw,20px);color:var(--gris-claro);max-width:540px;margin-bottom:30px}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px}
+  .pills{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:34px}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--gris-claro);
+    background:rgba(255,255,255,.05);border:1px solid var(--borde);padding:9px 15px;border-radius:50px;
+  }
+  .pill svg{width:15px;height:15px;color:var(--lima)}
+  .hero-price{
+    display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 14px;
+    background:rgba(255,255,255,.04);border:1px solid var(--borde);
+    border-left:3px solid var(--lima);
+    padding:16px 22px;border-radius:14px;backdrop-filter:blur(6px);
+  }
+  .hero-price .big{font-size:24px;font-weight:900;color:#fff}
+  .hero-price .big span{color:var(--lima)}
+  .hero-price .small{font-size:13px;color:var(--gris);font-weight:500}
+  .hero-price .sep{color:rgba(255,255,255,.2)}
+
+  /* ---------- STATS ---------- */
+  .stats{background:var(--violeta);padding:0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{padding:40px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.13)}
+  .stat:last-child{border-right:none}
+  .stat .num{font-size:clamp(34px,5vw,52px);font-weight:900;line-height:1;letter-spacing:-1px}
+  .stat .num .suf{color:var(--lima)}
+  .stat .lbl{font-size:14px;font-weight:500;color:rgba(255,255,255,.85);margin-top:8px}
+
+  /* ---------- ACTIVIDADES ---------- */
+  .pad{padding:90px 0}
+  .acts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .act{
+    position:relative;height:300px;border-radius:var(--r);overflow:hidden;
+    border:1px solid var(--borde);
+  }
+  .act-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
+  .act:hover .act-img{transform:scale(1.08)}
+  .act-ov{
+    position:absolute;inset:0;
+    background:linear-gradient(0deg,rgba(10,10,10,.94) 8%,rgba(10,10,10,.35) 55%,rgba(10,10,10,.1) 100%);
+  }
+  .act-body{position:absolute;left:0;right:0;bottom:0;padding:22px}
+  .act-body h3{font-size:21px;font-weight:800;margin-bottom:5px}
+  .act-body p{font-size:14px;color:var(--gris-claro)}
+  .act-tag{
+    display:inline-block;margin-top:10px;font-size:12px;font-weight:700;
+    background:var(--lima);color:#0a0a0a;padding:4px 11px;border-radius:50px;
+  }
+
+  /* ---------- GALERÍA ---------- */
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px}
+  .gal-item{border-radius:14px;overflow:hidden;border:1px solid var(--borde)}
+  .gal-item .gi-img{width:100%;height:100%;background-size:cover;background-position:center;transition:transform .6s ease}
+  .gal-item:hover .gi-img{transform:scale(1.08)}
+  .gal-big{grid-column:span 2;grid-row:span 2}
+  .gal-note{margin-top:18px;font-size:13px;color:var(--gris);text-align:center}
+
+  /* ---------- FRASE IMPACTO ---------- */
+  .impacto{background:var(--violeta);padding:80px 0;text-align:center}
+  .impacto h2{font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;letter-spacing:-1px;max-width:900px;margin:0 auto}
+  .impacto h2 .l2{display:block;color:var(--lima);margin-top:8px}
+
+  /* ---------- BENEFICIOS ---------- */
+  .ben-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .ben{background:var(--negro-2);border:1px solid var(--borde);border-radius:var(--r);padding:30px 26px;transition:border-color .3s,transform .3s}
+  .ben:hover{border-color:rgba(170,221,0,.4);transform:translateY(-4px)}
+  .ben-ico{
+    width:50px;height:50px;border-radius:13px;background:rgba(123,47,190,.18);border:1px solid rgba(123,47,190,.4);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .ben-ico svg{width:24px;height:24px;color:var(--lima)}
+  .ben h3{font-size:18px;font-weight:800;margin-bottom:8px}
+  .ben p{font-size:14px;color:var(--gris)}
+
+  /* ---------- PLANES ---------- */
+  .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+  .plan{
+    background:var(--negro-2);border:1px solid var(--borde);border-radius:20px;
+    padding:34px 28px;position:relative;transition:transform .3s;
+  }
+  .plan.feat{border:2px solid var(--lima);background:var(--negro-3);transform:scale(1.03)}
+  .plan.feat:hover{transform:scale(1.05)}
+  .plan:not(.feat):hover{transform:translateY(-4px)}
+  .plan-badge{
+    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    background:var(--lima);color:#0a0a0a;font-size:12px;font-weight:800;
+    padding:6px 16px;border-radius:50px;letter-spacing:.5px;white-space:nowrap;
+  }
+  .plan h3{font-size:20px;font-weight:800;margin-bottom:6px}
+  .plan .price{font-size:42px;font-weight:900;letter-spacing:-1px;margin:10px 0 2px}
+  .plan .price small{font-size:15px;font-weight:500;color:var(--gris)}
+  .plan .desc{font-size:14px;color:var(--gris);margin-bottom:22px;min-height:42px}
+  .plan ul{list-style:none;margin-bottom:26px}
+  .plan li{display:flex;align-items:center;gap:10px;font-size:14px;padding:8px 0;color:var(--gris-claro)}
+  .plan li.no{color:#6a6a6a}
+  .plan li .ck{flex-shrink:0;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+  .plan li .ck.y{color:var(--lima)}
+  .plan li .ck.n{color:#555}
+  .plan .btn{width:100%}
+
+  /* ---------- TESTIMONIOS ---------- */
+  .tst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .tst{background:var(--negro-2);border:1px solid var(--borde);border-radius:var(--r);padding:30px}
+  .stars{color:var(--lima);font-size:16px;letter-spacing:2px;margin-bottom:16px}
+  .tst p{font-size:15px;color:var(--gris-claro);font-style:italic;margin-bottom:22px}
+  .tst-who{display:flex;align-items:center;gap:13px}
+  .avatar{
+    width:46px;height:46px;border-radius:50%;background:var(--violeta);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;
+  }
+  .tst-who .nm{font-weight:700;font-size:15px}
+  .tst-who .ag{font-size:13px;color:var(--gris)}
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap{max-width:780px;margin:0 auto}
+  .faq{border:1px solid var(--borde);border-radius:14px;margin-bottom:12px;overflow:hidden;background:var(--negro-2)}
+  .faq-q{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    background:none;border:none;color:#fff;text-align:left;cursor:pointer;
+    padding:20px 22px;font-size:16px;font-weight:600;font-family:inherit;
+  }
+  .faq-q .chev{flex-shrink:0;transition:transform .35s ease;color:var(--lima)}
+  .faq.open .faq-q .chev{transform:rotate(180deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .faq-a p{padding:0 22px 20px;color:var(--gris);font-size:15px}
+
+  /* ---------- CTA FINAL ---------- */
+  .cta-final{padding:110px 0;text-align:center;overflow:hidden}
+  .cta-glow{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(123,47,190,.45) 0%,rgba(123,47,190,0) 70%);
+    z-index:0;pointer-events:none;
+  }
+  .cta-final .wrap{position:relative;z-index:1}
+  .cta-final h2{font-size:clamp(30px,5.5vw,58px);font-weight:900;line-height:1.05;letter-spacing:-1.5px;max-width:780px;margin:0 auto 16px}
+  .cta-final .csub{color:var(--gris-claro);font-size:18px;max-width:520px;margin:0 auto 32px}
+  .cta-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:34px}
+  .cta-pills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--borde);padding:40px 0;background:var(--negro)}
+  .foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
+  .foot-inner .copy{font-size:14px;color:var(--gris)}
+  .foot-inner .sign{font-size:14px;color:var(--gris)}
+  .foot-inner .sign a{color:var(--lima);font-weight:600}
+
+  /* ---------- WPP FLOTANTE ---------- */
+  .wpp-float{
+    position:fixed;right:22px;bottom:22px;z-index:90;
+    width:60px;height:60px;border-radius:50%;background:var(--wpp);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 0 rgba(37,211,102,.6);
+    animation:pulse 2.4s infinite;transition:transform .25s;
+  }
+  .wpp-float:hover{transform:scale(1.1)}
+  .wpp-float svg{width:32px;height:32px;color:#fff}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}
+    70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .acts-grid,.ben-grid,.plans-grid,.tst-grid{grid-template-columns:repeat(2,1fr)}
+    .plan.feat{transform:none}
+    .plan.feat:hover{transform:translateY(-4px)}
+  }
+  @media(max-width:860px){
+    .nav-links,.nav-cta .btn{display:none}
+    .burger{display:flex}
+  }
+  @media(max-width:760px){
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(2){border-right:none}
+    .stat{border-bottom:1px solid rgba(255,255,255,.13)}
+    .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:140px}
+    .gal-big{grid-column:span 2;grid-row:span 1;height:auto}
+    .pad{padding:64px 0}
+  }
+  @media(max-width:560px){
+    .acts-grid,.ben-grid,.plans-grid,.tst-grid{grid-template-columns:1fr}
+    .hero-price{flex-direction:column;align-items:flex-start;gap:4px}
+    .hero-price .sep{display:none}
+    .hero-btns .btn{flex:1}
+  }
+  @media(max-width:360px){
+    .wrap{padding:0 14px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-ico">⚡</span> Gym Olimpo
+    </a>
+    <ul class="nav-links">
+      <li><a href="#actividades">Actividades</a></li>
+      <li><a href="#instalaciones">Instalaciones</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#testimonios">Opiniones</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contacto" class="btn btn-lima">Probá gratis</a>
+      <button class="burger" id="burger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#actividades">Actividades</a>
+    <a href="#instalaciones">Instalaciones</a>
+    <a href="#planes">Planes</a>
+    <a href="#testimonios">Opiniones</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contacto" class="btn btn-lima">Probá gratis</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-video">
+    <iframe
+      src="https://www.youtube.com/embed/pqRUcXG6R3Q?autoplay=1&mute=1&loop=1&playlist=pqRUcXG6R3Q&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1"
+      title="Gym Olimpo" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="badge"><span class="dot"></span> 7 años entrenando Marcos Juárez</span>
+      <h1>Entrená <span class="lima">sin límites</span><br>en Gym Olimpo</h1>
+      <p class="sub">Musculación, Pilates Reformer, Spinning, Kick Boxing y más de 8 actividades. Un team de profes que te acompaña en cada paso.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn btn-lima">Empezá hoy</a>
+        <a href="#actividades" class="btn btn-ghost">Ver actividades</a>
+      </div>
+      <div class="pills">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Bv. Sáenz Peña 1051, Marcos Juárez
+        </span>
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Lun a Sáb · 8 turnos diarios
+        </span>
+      </div>
+      <div class="hero-price">
+        <span class="big">Desde <span>$XXXX</span>/mes</span>
+        <span class="sep">·</span>
+        <span class="small">Sin matrícula</span>
+        <span class="sep">·</span>
+        <span class="small">Sin permanencia</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="wrap" style="padding:0">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="num"><span data-count="7">0</span><span class="suf">+</span></div>
+        <div class="lbl">Años de trayectoria</div>
+      </div>
+      <div class="stat">
+        <div class="num"><span data-count="8">0</span><span class="suf">+</span></div>
+        <div class="lbl">Actividades</div>
+      </div>
+      <div class="stat">
+        <div class="num"><span data-count="12">0</span></div>
+        <div class="lbl">Camas de Pilates</div>
+      </div>
+      <div class="stat">
+        <div class="num"><span data-count="8">0</span></div>
+        <div class="lbl">Turnos diarios</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTIVIDADES ============ -->
+<section class="pad" id="actividades">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <span class="eyebrow">Disciplinas</span>
+      <h2 class="title">Elegí cómo querés <span class="lima">moverte</span></h2>
+      <p>Más de 8 actividades para todos los niveles y objetivos. Encontrá la tuya.</p>
+    </div>
+    <div class="acts-grid">
+      <div class="act reveal">
+        <div class="act-img" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="act-ov"></div>
+        <div class="act-body"><h3>Musculación</h3><p>Equipamiento completo y plan personalizado.</p></div>
+      </div>
+      <div class="act reveal">
+        <div class="act-img" style="background-image:url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="act-ov"></div>
+        <div class="act-body"><h3>TRX / Funcional</h3><p>Entrenamiento de fuerza y resistencia con tu peso.</p></div>
+      </div>
+      <div class="act reveal">
+        <div class="act-img" style="background-image:url('https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="act-ov"></div>
+        <div class="act-body"><h3>Spinning</h3><p>Cardio intenso al ritmo de la música.</p></div>
+      </div>
+      <div class="act reveal">
+        <div class="act-img" style="background-image:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="act-ov"></div>
+        <div class="act-body"><h3>Kick Boxing</h3><p>Descargá energía y mejorá tu técnica.</p></div>
+      </div>
+      <div class="act reveal">
+        <div class="act-img" style="background-image:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="act-ov"></div>
+        <div class="act-body"><h3>Pilates Reformer</h3><p>Postura, fuerza y movilidad en camas profesionales.</p><span class="act-tag">12 camas · 8 turnos</span></div>
+      </div>
+      <div class="act reveal">
+        <div class="act-img" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=900&q=80')"></div>
+        <div class="act-ov"></div>
+        <div class="act-body"><h3>Zumba · GAP · Stretching</h3><p>Clases grupales para divertirte y tonificar.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERÍA ============ -->
+<section class="pad" id="instalaciones" style="padding-top:0">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <span class="eyebrow">Instalaciones</span>
+      <h2 class="title">Un espacio pensado <span class="lima">para vos</span></h2>
+      <p>Equipamiento de primer nivel, ambientes amplios y climatizados.</p>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-item gal-big reveal"><div class="gi-img" style="background-image:url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1100&q=80')"></div></div>
+      <div class="gal-item reveal"><div class="gi-img" style="background-image:url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=700&q=80')"></div></div>
+      <div class="gal-item reveal"><div class="gi-img" style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=700&q=80')"></div></div>
+      <div class="gal-item reveal"><div class="gi-img" style="background-image:url('https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=700&q=80')"></div></div>
+      <div class="gal-item reveal"><div class="gi-img" style="background-image:url('https://images.unsplash.com/photo-1593079831268-3381b0db4a77?auto=format&fit=crop&w=700&q=80')"></div></div>
+    </div>
+    <p class="gal-note">* Imágenes de referencia. Las fotos reales del gimnasio se cargan próximamente.</p>
+  </div>
+</section>
+
+<!-- ============ FRASE IMPACTO ============ -->
+<section class="impacto reveal">
+  <div class="wrap">
+    <h2>Juntos llegamos más lejos.<span class="l2">El límite lo ponés vos.</span></h2>
+  </div>
+</section>
+
+<!-- ============ BENEFICIOS ============ -->
+<section class="pad">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <span class="eyebrow">Por qué Olimpo</span>
+      <h2 class="title">Más que un <span class="lima">gimnasio</span></h2>
+    </div>
+    <div class="ben-grid">
+      <div class="ben reveal">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Team capacitado</h3>
+        <p>Profes formados que te guían y corrigen en cada entrenamiento.</p>
+      </div>
+      <div class="ben reveal">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>+8 actividades</h3>
+        <p>De musculación a Pilates Reformer. Variá tu rutina cuando quieras.</p>
+      </div>
+      <div class="ben reveal">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>Comunidad real</h3>
+        <p>Una familia que te motiva a no aflojar y celebrar cada logro.</p>
+      </div>
+      <div class="ben reveal">
+        <div class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Sin ataduras</h3>
+        <p>Sin matrícula ni permanencia. Entrenás con total libertad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANES ============ -->
+<section class="pad" id="planes" style="background:var(--negro-2)">
+  <div class="wrap">
+    <div class="sect-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow">Planes</span>
+      <h2 class="title">Elegí el plan <span class="lima">ideal para vos</span></h2>
+      <p style="margin-left:auto;margin-right:auto">Sin matrícula. Sin permanencia. Cambiá o cancelá cuando quieras.</p>
+    </div>
+    <div class="plans-grid">
+      <!-- Básico -->
+      <div class="plan reveal">
+        <h3>Básico</h3>
+        <div class="price">$XXXX<small>/mes</small></div>
+        <p class="desc">Ideal para empezar a entrenar a tu ritmo.</p>
+        <ul>
+          <li><span class="ck y">✓</span> Acceso a musculación</li>
+          <li><span class="ck y">✓</span> Sala de cardio</li>
+          <li><span class="ck y">✓</span> Asesoramiento inicial</li>
+          <li class="no"><span class="ck n">✕</span> Clases grupales</li>
+          <li class="no"><span class="ck n">✕</span> Pilates Reformer</li>
+        </ul>
+        <a href="#contacto" class="btn btn-ghost">Elegir Básico</a>
+      </div>
+      <!-- Completo -->
+      <div class="plan feat reveal">
+        <span class="plan-badge">★ Más elegido</span>
+        <h3>Completo</h3>
+        <div class="price">$XXXX<small>/mes</small></div>
+        <p class="desc">Acceso total a las actividades grupales.</p>
+        <ul>
+          <li><span class="ck y">✓</span> Musculación + cardio</li>
+          <li><span class="ck y">✓</span> Todas las clases grupales</li>
+          <li><span class="ck y">✓</span> Spinning, Funcional, Zumba</li>
+          <li><span class="ck y">✓</span> Plan personalizado</li>
+          <li class="no"><span class="ck n">✕</span> Pilates Reformer</li>
+        </ul>
+        <a href="#contacto" class="btn btn-lima">Elegir Completo</a>
+      </div>
+      <!-- Premium -->
+      <div class="plan reveal">
+        <h3>Premium</h3>
+        <div class="price">$XXXX<small>/mes</small></div>
+        <p class="desc">La experiencia full, incluido Pilates Reformer.</p>
+        <ul>
+          <li><span class="ck y">✓</span> Todo lo del plan Completo</li>
+          <li><span class="ck y">✓</span> Pilates Reformer (12 camas)</li>
+          <li><span class="ck y">✓</span> Turnos prioritarios</li>
+          <li><span class="ck y">✓</span> Seguimiento personalizado</li>
+          <li><span class="ck y">✓</span> Acceso a los 8 turnos</li>
+        </ul>
+        <a href="#contacto" class="btn btn-ghost">Elegir Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="pad" id="testimonios">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <span class="eyebrow">Opiniones</span>
+      <h2 class="title">Lo que dicen <span class="lima">los socios</span></h2>
+    </div>
+    <div class="tst-grid">
+      <div class="tst reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Cambié totalmente mi rutina. Los profes te conocen por tu nombre y te empujan a mejorar. El mejor gym de Marcos Juárez."</p>
+        <div class="tst-who"><span class="avatar">ML</span><div><div class="nm">María López</div><div class="ag">Socia hace 3 años</div></div></div>
+      </div>
+      <div class="tst reveal">
+        <div class="stars">★★★★★</div>
+        <p>"El Pilates Reformer es increíble. Mejoré mi postura y mi dolor de espalda desapareció. Las 12 camas y los turnos son una comodidad enorme."</p>
+        <div class="tst-who"><span class="avatar">JF</span><div><div class="nm">Julieta Ferrari</div><div class="ag">Socia hace 1 año</div></div></div>
+      </div>
+      <div class="tst reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Sin permanencia y con un montón de actividades. Probé funcional, spinning y kick boxing. Hay buena onda y comunidad de verdad."</p>
+        <div class="tst-who"><span class="avatar">DG</span><div><div class="nm">Diego Gómez</div><div class="ag">Socio hace 5 años</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="pad" id="faq" style="background:var(--negro-2)">
+  <div class="wrap">
+    <div class="sect-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="title">¿Tenés <span class="lima">dudas?</span></h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq reveal">
+        <button class="faq-q">¿Puedo hacer una clase de prueba gratis?
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>¡Sí! Te invitamos a una clase de prueba sin cargo para que conozcas las instalaciones y el equipo. Escribinos por WhatsApp y coordinamos el día.</p></div>
+      </div>
+      <div class="faq reveal">
+        <button class="faq-q">¿Hay permanencia o contrato mínimo?
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>No. En Gym Olimpo no hay matrícula ni permanencia. Pagás mes a mes y podés cancelar cuando quieras, sin penalidades.</p></div>
+      </div>
+      <div class="faq reveal">
+        <button class="faq-q">¿Hay cupo limitado en las clases?
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Las clases grupales y el Pilates tienen cupos para garantizar la atención personalizada. Por eso ofrecemos 8 turnos diarios para que siempre encuentres lugar.</p></div>
+      </div>
+      <div class="faq reveal">
+        <button class="faq-q">¿Qué es el Pilates Reformer y necesito experiencia?
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Es Pilates realizado en camas profesionales (Reformer) que trabajan fuerza, postura y movilidad de bajo impacto. Contamos con 12 camas y no necesitás experiencia previa: los profes adaptan cada clase a tu nivel.</p></div>
+      </div>
+      <div class="faq reveal">
+        <button class="faq-q">¿Tienen vestuarios?
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Sí, contamos con vestuarios para que puedas cambiarte y entrenar con total comodidad.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="cta-final" id="contacto">
+  <div class="cta-glow"></div>
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Tu mejor versión<br>empieza <span class="lima">hoy</span></h2>
+      <p class="csub">Sumate a la comunidad de Gym Olimpo. Escribinos y coordiná tu clase de prueba gratis.</p>
+      <div class="cta-btns">
+        <a class="btn btn-wpp" href="https://wa.me/5493472589623?text=Hola!%20Quiero%20info%20de%20Gym%20Olimpo%20y%20una%20clase%20de%20prueba" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.24-8.24s8.24 3.7 8.24 8.24-3.7 8.25-8.25 8.25zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+          Escribinos por WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="#planes">Ver planes</a>
+      </div>
+      <div class="cta-pills">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Bv. Sáenz Peña 1051, Marcos Juárez
+        </span>
+        <a class="pill" href="tel:+5493472589623">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +54 9 3472 58-9623
+        </a>
+        <a class="pill" href="https://instagram.com/gymolimpo_" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @gymolimpo_
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-inner">
+    <a href="#" class="logo"><span class="logo-ico">⚡</span> Gym Olimpo</a>
+    <span class="copy">© 2026 Gym Olimpo · Marcos Juárez. Todos los derechos reservados.</span>
+    <span class="sign">Diseño web: <a href="https://instagram.com/gymolimpo_" target="_blank" rel="noopener">Gregorio Tobares</a></span>
+  </div>
+</footer>
+
+<!-- ============ WPP FLOTANTE ============ -->
+<a class="wpp-float" href="https://wa.me/5493472589623?text=Hola!%20Quiero%20info%20de%20Gym%20Olimpo" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.24-8.24s8.24 3.7 8.24 8.24-3.7 8.25-8.25 8.25zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+</a>
+
+<script>
+  // ----- Menú burger -----
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }));
+
+  // ----- FAQ accordion -----
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const faq = q.parentElement;
+      const ans = q.nextElementSibling;
+      const isOpen = faq.classList.contains('open');
+      document.querySelectorAll('.faq').forEach(f => {
+        f.classList.remove('open');
+        f.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        faq.classList.add('open');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ----- Reveal con IntersectionObserver -----
+  const revObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+  // ----- Contadores animados -----
+  const animateCount = (el) => {
+    const target = +el.dataset.count;
+    const dur = 1500;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  };
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+</script>
+</body>
+</html>
