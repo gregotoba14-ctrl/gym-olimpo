@@ -1,0 +1,11 @@
+# Configuración interna de Claude Code
+.claude/
+
+# Otros proyectos en esta carpeta (no forman parte de la landing)
+catalogo.html
+contacto.html
+tecnologia.html
+css/
+js/
+assets/
+README.md
